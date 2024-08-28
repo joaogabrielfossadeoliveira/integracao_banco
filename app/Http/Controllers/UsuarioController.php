@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\usuarioService;
 use Illuminate\Http\Request;
+use PharIo\Manifest\Email;
 
 class UsuarioController extends Controller
 {
@@ -20,6 +21,45 @@ class UsuarioController extends Controller
         $user = $this->usuarioService->creat($request->all());
         return $user;
     }
+
+ public function findById($id){
+
+    $result = $this->usuarioService->findById($id);
+    
+
+    return response()->json($result);
+  
+ } 
+ public function index(){
+  $result = $this->usuarioService->getAll();
+
+  return response()->json($result);
+ }
+
+ public function searchByName(Request $request){
+  $result = $this->usuarioService->searchByName($request->nome);
+ }
  
+ public function searchByEmail(Request $request){
+  $result = $this->usuarioService->searchByEmail($request->Email);
+  
+  return response()->json($result);
+
+ }
+
+ public function delete($id){
+  $result = $this->usuarioService->delete($id);
+  return response()->json($result);
+
+ }
+
+ public function update(Request $request){
+
+  $result = $this->usuarioService->update($request->all());
+
+
+  return response()->json($result);
+ }
+
 
 }
